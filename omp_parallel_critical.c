@@ -7,7 +7,7 @@ int main()
     double t1 = omp_get_wtime();
 
     double pi;
-    long num_steps = 10000000000;
+    long num_steps = 1000000000;
     double step = 1.0 / (double)num_steps;
 
 #pragma omp parallel
