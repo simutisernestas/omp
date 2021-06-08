@@ -76,16 +76,13 @@ int main(int argc, char *argv[])
 
    start = omp_get_wtime();
    #pragma omp parallel
+   #pragma omp single
    {
-      struct node *p_copy = NULL;
       while (p != NULL)
       {
-         #pragma omp critical
-         {
-            p_copy = p;
-            p = p->next;
-         }
-         processwork(p_copy);
+         #pragma omp task firstprivate(p)
+         processwork(p);
+         p = p->next;
       }
    }
 
